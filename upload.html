@@ -1,0 +1,62 @@
+<html lang="en">
+
+ <head>
+    <meta charset="UTF-8">
+    <title>Upload Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="pageStyle.css">
+    <script type="text/javascript" src="uploadArticle.js"></script>
+
+
+ </head>
+
+
+
+    <header>
+    <br>
+     <form action="feedpage.html">
+        <input type="submit" class = "feedButton "value="Go to the Feed" />
+    </form>
+    <!-- <img src="Creddit.png" style = "margin-left:-105em; " alt="Creddit logo" width = "100" height="70"/> -->
+</header>
+
+<body>
+
+  </body>
+
+
+    <main>
+
+        <div class="inputDiv center"  align="center">
+
+            <h1 style="text-align: center;" class = "subtitle">Upload Article</h1><br>
+            <form id="submitArticle" method="POST" action = "feedpage.html">
+                <h2 align="center" class="letters">Link</h2>
+                <input type="text" id="articleLink" name="articleLink" align="center" class="text-line"><br>
+                <h2 class="subtitle">Tags</h2>
+                Sport: <input type="checkbox" id="color[]" name="color[]" value="Sport" checked="true"><br>
+                Art: <input type="checkbox" id="color[]" name="color[]" value="Art"><br>
+                Space: <input type="checkbox" id="color[]" name="color[]" value="Space"><br>
+                Uk: <input type="checkbox" id="color[]" name="color[]" value="Uk"><br>
+                Money: <input type="checkbox" id="color[]" name="color[]" value="Money"><br>
+                Covid: <input type="checkbox" id="color[]" name="color[]" value="Covid"><br>
+                Overseas: <input type="checkbox" id="color[]" name="color[]" value="Overseas"><br>
+                Energy: <input type="checkbox" id="color[]" name="color[]" value="Energy"><br>
+                <h2 class = "subtitle">Major Tag</h2>
+                Sport: <input type="radio" name="majorTag" class="majorTag" value="Sport"><br>
+                Art: <input type="radio" name="majorTag" class="majorTag" value="Art"><br>
+                Space: <input type="radio" name="majorTag" class="majorTag" value="Space"><br>
+                Uk: <input type="radio" name="majorTag" class="majorTag" value="Uk"><br>
+                Money: <input type="radio" name="majorTag" class="majorTag" value="Money"><br>
+                Covid: <input type="radio" name="majorTag" class="majorTag" value="Covid"><br>
+                Overseas: <input type="radio" name="majorTag" class="majorTag" value="Overseas"><br><br>
+                <input type="submit" class="submit" id="submit" value="Upload the Article">
+            </form>
+
+
+        </div>
+    </main>
+
+
+</html>

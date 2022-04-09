@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type= "text/css" href= "pageStyle.css">
+    <title>Sign Up</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="createAccount.js"></script>
+
+</head>
+
+
+<header> 
+   <br>
+    
+
+    <form action="feedpage.html"style="display: block; float:right; margin:0 20px 0 0; ">
+            <input type="submit" class = "feedButton "value="Go to the Feed" />
+    </form>    
+    <img src="Creddit.png" style="display: block; float:left; margin-left: 20px;" alt="Creddit logo" width = "100" height="70"/>
+   
+
+     
+    
+</header>
+
+<body>
+       
+</body>
+
+
+   
+
+<main>
+
+    <div class="inputDiv center">
+        <form id = "register_form" method ="POST" action="login.html">
+        <br>
+        <h1  style="margin-left: 0.5em;" class = "center letters title"> Sign Up</h1> 
+        <span id="usernameTaken" style="color: red;"></span></label><br>
+        <input type="text" name="username"  id="username" placeholder='Username' class="text-line center"><br>
+        <span id="emailTaken" style="color: red;"></span></label><br>
+        <input type="text" name="email"  id="email" placeholder='Email' class="text-line center"><br>
+        <span id="matching" style="color: red;"></span></label><br>
+        <input type="password" name="password_1"  id="password_1" placeholder='Password' class="text-line center"><br>
+        <input type="password" name="password_2" id="password_2" placeholder='Confirm password' class="text-line center"><br>
+        <br>
+        <input type = "submit" name = "submit" id ="submit" style = "font-size: 20px;" class ="submit center " value = "Create Account">
+        <br>
+            <p style="margin-left: 20em;" class ="letters"  >  Have an account? <a href="login.html">Login in</a></p>
+        </form>
+
+
+    </div>
+  
+
+</main>
+
+
+
+
+</html>
+

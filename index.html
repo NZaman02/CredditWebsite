@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="Comment.js"></script>
+        <link rel="stylesheet" href="feedpage.css">
+        
+    </head>
+
+
+
+<nav>
+     
+    <div id="NavBar" class="topnav letters" >
+        <form>
+        </form>
+      
+        <form action="upload.html">
+                <input type="submit" class = "navButton "value="Upload Article" />
+        </form>    
+        <form action="AccountSetting.html">
+                <input type="submit" class = "navButton "value="Account Settings" />
+        </form>    
+        <form action="login.html">
+                <input type="submit" class = "navButton "value="Login" />
+        </form>    
+        <form action="SignUp.html">
+                <input type="submit" class = "navButton "value="Register" />
+        </form>
+        <span id="userName" style="margin: 1em;">You are not logged in</span>
+
+
+
+    </div>
+    <br>
+</nav>
+
+    <body>
+
+
+        
+    <h1 style="text-align: center; color: white;" class="title">Feed Page </h1>
+
+    <div id="letters">
+        <div class="center content contentDiv letters" id="feed">
+        </div>
+    </div> 
+
+
+    <br>
+
+    
+        <form id="loadPosts" method="GET" class="bottom">     
+            <input type="submit" name="submit" id="submit" style = "font-size: 20px; margin-top: 1em; margin-right: 0.5em;" class ="center submitButton " value = "Load More">
+         </form>
+
+
+    
+    <script>
+
+        // need to change this to submit user account info
+        $(document).ready(function(e){
+            $.ajax({
+                method: "POST",
+                url: "getUsername.php",
+                headers:{
+                "Authorization": localStorage.getItem("JWT")
+                },
+                success: function(data){setLoggedinIcon(data);},
+                failure: function(data){console.log(data);}
+            });
+    });
+
+        function setLoggedinIcon(username){
+            username = JSON.parse(username);
+            if (username != null){
+                sentence = "Logged in as " + username["username"];
+            } else {
+                sentence = "You are not logged in";
+            }
+            document.getElementById("userName").innerHTML = sentence;
+        };
+
+        $(document).on('submit', '#comment_form', function(e){
+            e.preventDefault();
+            $.ajax({
+                method: "POST",
+                url: "comment.php",
+                data: $(this).serialize(),
+                success: console.log("success"),
+                failure: console.log("failure")
+            });
+        });
+
+        function loggingOut(){
+            // var cookies = document.cookie.split(";");
+
+            username = JSON.parse(username);
+
+            username["username"] = null;
+            
+            sentence = "You are not logged in";
+            document.getElementById("userName").innerHTML = sentence;
+            
+    //     for (var i = 0; i < cookies.length; i++) {
+    //         var cookie = cookies[i];
+    //         var eqPos = cookie.indexOf("=");
+    //         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    //         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    // }
+
+
+        }
+
+    </script>
+    </body>
+
+
+
+
+</html>

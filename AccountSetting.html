@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--Chooses the language for the web page-->
+<html lang ="en">
+<head>
+	<link rel="stylesheet" type= "text/css" href= "settings.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="accountInfo.js"></script>
+	<script type="text/javascript">
+		const tagNames = ["Space", "UK", "Money", "Covid", "Overseas", "Energy" ]
+		function updatePassword() {
+		}
+
+		//change Details
+		function createChangeDetails() {
+			$(".remove").remove();
+			$(".add").append("<p class='remove subtitle'>Change Your Details Page</p>");
+			$(".add").append("<p class='remove letters'>Change Password:</p>");
+			$(".add").append("<form id='changePassword' class='changePassword remove letters' method='POST'style='display: inline;'></form");
+			$(".changePassword").append("<input type='text' class = 'input-item center' placeholder='New Password' id='password1' name='password1'><br><input type='text' class = 'input-item center' placeholder='Retype Password' id='password2' name='password2'><br><input type='submit' value='Change Password' class = 'Cbutton' id='changePassword'> <br>");
+			$(".add").append("<br><form id=\"changeUsername\" class='changeUsername remove letters' method=\"POST\"style=\"display: inline;\"></form><br>");
+			$(".changeUsername").append("Change Username:<br>\n" +
+					"                        <input type=\"text\" id=\"usernameInp\" placeholder='New Username' class='input-item center' name=\"username\"><br>\n" +
+					"                        <input type=\"submit\" value=\"Change Username\" class='Cbutton' id=\"change username\"<br>")
+			$(".add").append("<br><form id=\"changeEmail\" class='changeEmail remove letters' method=\"POST\" style=\"display: inline;\"></form>")
+			$(".changeEmail").append("Change Email: <br>\n" +
+					"                        <input id=\"emailInp\" class='input-item center' placeholder='New Email' type=\"text\" name=\"emailInp\"><br>\n" +
+					"                        <input type=\"submit\" id=\"changeEmail\" class='Cbutton' value=\"Change Email\">")
+			addSubmitListener();
+		}
+		function tagSelector() {
+			for (let i = 0; i < tagNames.length; i++) {
+				$(".selectInterest").append("<option>"+ tagNames[i] +"</option>");
+			}
+		}
+		function saveTag(){
+			const input = document.getElementById("selectInterest")
+            $.ajax({method: "POST",
+                    url:"updateDeets.php",
+                    headers:{
+                        "Authorization": localStorage.getItem("JWT")
+                    },
+			        data: {data:input.options[input.selectedIndex].text},
+                    success: function(data){
+                        console.log(data);
+                    },
+                    failure: function(data){
+                        console.log(data);
+                    }
+                    });
+		}
+
+		//changes to interests
+		function createInterest() {
+			$(".remove").remove();
+			$(".add").append("<p class='remove subtitle'>Interest Page</p>");
+			$(".add").append("<form class='remove interestForm'></form>");
+			$(".interestForm").append("<select class='selectInterest' name='selectInterest' id='selectInterest'></select>");
+			tagSelector();
+			$(".interestForm").append("<br>" + "<br>");
+			$(".interestForm").append("<button type='button' onclick='saveTag()'>Add</button>");
+			$(".interestForm").append("<br>" + "<br>");
+			$(".interestForm").append("<button type='button' onclick='getTags()'>Show My Tags</button>");
+
+		}
+		//changes to bookmarks
+		function createBookmarks() {
+			$(".remove").remove();
+			$(".add").append("<p class='remove subtitle'>Bookmarks Page</p>");
+		}
+		//changes to upload an article
+		function uploadAnArticle(){
+			$(".remove").remove();
+			$(".add").append("<form class='remove articleForm'></form>");
+			$(".articleForm").append("<input name='articleName' placeholder = 'Article Name:' class = 'input-item' type='text'>");
+			$(".articleForm").append("<br><br>");
+			$(".articleForm").append("<input name='articleLink' placeholder = 'Article Link:' class = 'input-item'  type='text'>")
+            $(".articleForm").append("<br><br>");;
+			$(".articleForm").append("    <form style = 'margin-left:6em'>\n" +
+                "    <div class=\"multiselect \" id = \"topicList\">\n" +
+                "    <div class=\"selectBox \" onclick=\"dropdownMenu()\">\n" +
+                "      <select>\n" +
+                "        <option>Choose your topics</option>\n" +
+                "      </select>\n" +
+                "        <div class=\"overSelect\"></div>\n" +
+                "        </div>\n" +
+                "            <div id=\"checkboxes\" class='addCheckBox'>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "    </form>")
+            articleTagsSelector()
+            $(".articleForm").append("<br><br>");
+            $(".articleForm").append("<button type='button' style = 'margin-left: 7em' onclick='getTags()'>Test for tags</button>");
+		}
+		function getTags() {
+            for (let i = 0; i < tagNames.length; i++) {
+                if (document.getElementById(tagNames[i]).checked){
+                    savedTags.push(tagNames[i]);
+                }
+            }
+            let displayTags = "";
+            for (let i = 0; i < savedTags.length; i++) {
+                displayTags = displayTags + savedTags[i];
+            }
+            alert("Your saved tags are " + displayTags);
+            $(".interestForm").append(displayTags);
+		}1
+		function articleTagsSelector() {
+			for (let i = 0; i < tagNames.length; i++) {
+                $(".addCheckBox").append("<label for='\""+ tagNames[i] +"\"'>")
+				$(".addCheckBox").append("<input type='checkbox' value='\""+ tagNames[i]+"\"' id=\""+ tagNames[i]+"\" class='ads_Checkbox'>" + tagNames[i] +"</input>")
+			}
+
+		}
+		function seeMyArticles(){
+			$(".remove").remove();
+			$(".add").append("<p class='remove subtitle'>Your Uploaded Article</p>");
+		}
+	var expanded = false;
+		//allows drop down menu to have checklist
+	function dropdownMenu() {
+ 	 var checkboxes = document.getElementById("checkboxes");
+  	if (!expanded) {
+    	checkboxes.style.display = "block";
+    	expanded = true;
+  	} else {
+    	checkboxes.style.display = "none";
+    	expanded = false;
+  	}
+	}
+	//gets checkbox value from id
+	function checksTicks(){
+  	$('#saves').click(function() {
+    	var selectedVal = $('input[type=checkbox]:checked').map(function(_, el) {
+        	return $(el).val();
+    	}).get();
+
+   	document.getElementById("demo").innerHTML = selectedVal;
+	})
+}
+
+
+	</script>
+	<!-- Specitfies the character encoding -->
+	<meta charset = "UTF-8">
+	<title>Account Page</title>
+</head>
+
+
+
+<header>
+	 <form action="feedpage.html"style="display: block; float:right; margin:0 20px 0 0; ">
+            <input type="submit" class = "feedButton "value="Go to the Feed" />
+    </form>
+    <img src="Creddit.png" style="display: block; float:left; margin-left: 20px;" alt="Creddit logo" width = "100" height="70"/>
+</header>
+
+
+<aside>
+	<div class = "side">
+		<!-- side button -->
+		<!-- solution :3 -->
+	<button onclick="createChangeDetails()" type="button">Change Details</button><br>
+	<button onclick="createInterest()" type="button">Interests</button><br>
+	<button onclick="createBookmarks()" type="button">Bookmarks</button><br>
+
+	</div>
+</aside>
+
+
+<main>
+	<br>
+    <div id= "contentDiv" class = "center contentDiv">
+    	<h1  class = "center letters title" style ="padding-top: 1em;"> Account Settings</h1>
+    	<br>
+        <p class="center add"></p>
+
+    </div>
+</main>
+
+<body style="background-color:white;">
+
+</body>
+</html>

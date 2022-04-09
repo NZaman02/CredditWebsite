@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="uploadArticle.js"></script>
+        <style>
+            #submitArticle{
+                background-color:white;
+                padding: 2em;
+                border-radius: 2em;
+                margin: 3em;
+            }
+
+            #submitArticle label {
+                margin: 2em;
+                font-size: 1em;
+            }
+            
+            #submitArticle input {
+                margin: 0.6em;
+                font-size: 1em;
+                border-radius: 0.5em;
+                border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="NavBar" class="topnav">
+            <a href="feedpage.html">Feed</a>
+            <a href="uploadArticle.html">Upload Article</a>
+            <a href="AccountSettings.html">Account Info</a>
+            <a href="login.html">Login</a>
+            <a href="SignUp.html">Register</a>
+        </div><br>
+        <div id="centre">
+        <div class="content">   
+            <h1 style="text-align: center;">Upload Article</h1>
+            <form id="submitArticle" method="POST">
+                Link: <br>
+                <input type="text" id="articleLink" name="articleLink"><br>
+                <h2>Tags:</h2>
+                Sport: <input type="checkbox" id="color[]" name="color[]" value="sport"><br>
+                Art: <input type="checkbox" id="color[]" name="color[]" value="art"><br>
+                <h2>Major Tag:</h2>
+                Sport: <input type="radio" name="majorTag" class="majorTag" value="sport"><br>
+                Art: <input type="radio" name="majorTag" class="majorTag" value="art"><br>
+                <input type="submit" id="submit" value="upload article">
+            </form>
+        </div>
+        </div>
+    </body>
+</html>
